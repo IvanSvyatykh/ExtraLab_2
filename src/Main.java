@@ -26,7 +26,7 @@ public class Main {
         Point currentPos = startSearcher(map);
         Boolean isFinishReached = false;
         ArrayList<String> steps = possibleSteps(map, currentPos, "");
-        recursianSearcher(condition, currentPos, steps, map);
+        recursionSearcher(condition, currentPos, steps, map);
 
 
         return map;
@@ -105,12 +105,12 @@ public class Main {
         map[current.y] = stringBuilder.toString();
     }
 
-    public static void recursianSearcher(MapCondition condition, Point currentPos, ArrayList<String> possibleSteps, String[] map) {
+    public static void recursionSearcher(MapCondition condition, Point currentPos, ArrayList<String> possibleSteps, String[] map) {
 
 
         for (String step : possibleSteps) {
             if (condition.isFinishReached()) break;
-            String [] copy = Arrays.copyOf(map,map.length);
+            String[] copy = Arrays.copyOf(map, map.length);
             currentPos = stringToPoint(step, currentPos);
             if (map[currentPos.y].charAt(currentPos.x) == 'f') {
                 condition.setOriginalMap(Arrays.copyOf(map, map.length));
@@ -119,10 +119,10 @@ public class Main {
             }
             writeWay(map, currentPos);
             ArrayList<String> newSteps = possibleSteps(map, currentPos, step);
-            recursianSearcher(condition, currentPos, newSteps, map);
+            recursionSearcher(condition, currentPos, newSteps, map);
             if (!condition.isFinishReached()) {
                 currentPos = stringToPointReverse(step, currentPos);
-                map = Arrays.copyOf(copy,copy.length);
+                map = Arrays.copyOf(copy, copy.length);
             }
 
 
